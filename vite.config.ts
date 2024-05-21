@@ -8,5 +8,5 @@ export default defineConfig({
   build: {
     outDir: './docs'
   },
-  base: '/vite-boilerplate/'
+  base: '/tonrun/'
 });
