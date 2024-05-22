@@ -1,4 +1,4 @@
-.maze {
+/* .maze {
     display: grid;
     grid-template-columns: repeat(10, 20px);
     gap: 2px;
@@ -25,6 +25,22 @@
   .maze-cell.player {
     background-color: red;
     color: white;
+  }
+  
+  .controls {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 20px;
+  }
+  
+  .controls button {
+    margin: 5px;
+  }
+   */
+
+   .maze {
+    margin: 20px auto;
   }
   
   .controls {
