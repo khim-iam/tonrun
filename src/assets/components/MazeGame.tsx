@@ -100,7 +100,7 @@ const MazeGame: React.FC = () => {
   };
 
   const endGame = () => {
-    navigate('/');
+    navigate('/tonrun/');
   };
 
   return (
