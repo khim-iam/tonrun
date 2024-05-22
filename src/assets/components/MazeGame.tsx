@@ -1,4 +1,5 @@
 // import React, { useState, useEffect } from 'react';
+// import { useNavigate } from 'react-router-dom';
 // import './MazeGame.css';
 
 // const mazeWidth = 10;
@@ -21,6 +22,7 @@
 // const MazeGame: React.FC = () => {
 //   const [maze, setMaze] = useState<number[][]>(generateMaze());
 //   const [playerPosition, setPlayerPosition] = useState<{ x: number, y: number }>({ x: Math.floor(mazeWidth / 2), y: Math.floor(mazeHeight / 2) });
+//   const navigate = useNavigate();
 
 //   const handleKeyDown = (e: KeyboardEvent) => {
 //     e.preventDefault(); // Prevent the default behavior of arrow keys
@@ -62,6 +64,10 @@
 //     setPlayerPosition({ x: Math.floor(mazeWidth / 2), y: Math.floor(mazeHeight / 2) });
 //   };
 
+//   const endGame = () => {
+//     navigate('/');
+//   };
+
 //   return (
 //     <div>
 //       <h2>Maze Game</h2>
@@ -77,7 +83,7 @@
 //         ))}
 //       </div>
 //       <button onClick={regenerateMaze}>Regenerate Maze</button>
-//       <button onClick={() => alert('Game Ended')}>End Game</button>
+//       <button onClick={endGame}>End Game</button>
 //     </div>
 //   );
 // };
@@ -110,12 +116,11 @@ const MazeGame: React.FC = () => {
   const [playerPosition, setPlayerPosition] = useState<{ x: number, y: number }>({ x: Math.floor(mazeWidth / 2), y: Math.floor(mazeHeight / 2) });
   const navigate = useNavigate();
 
-  const handleKeyDown = (e: KeyboardEvent) => {
-    e.preventDefault(); // Prevent the default behavior of arrow keys
+  const movePlayer = (direction: string) => {
     let newX = playerPosition.x;
     let newY = playerPosition.y;
 
-    switch (e.key) {
+    switch (direction) {
       case 'ArrowUp':
         newY = Math.max(0, playerPosition.y - 1);
         break;
@@ -135,6 +140,11 @@ const MazeGame: React.FC = () => {
     if (maze[newY][newX] === 0) {
       setPlayerPosition({ x: newX, y: newY });
     }
+  };
+
+  const handleKeyDown = (e: KeyboardEvent) => {
+    e.preventDefault(); // Prevent the default behavior of arrow keys
+    movePlayer(e.key);
   };
 
   useEffect(() => {
@@ -167,6 +177,14 @@ const MazeGame: React.FC = () => {
             ))}
           </div>
         ))}
+      </div>
+      <div className="controls">
+        <button onClick={() => movePlayer('ArrowUp')}>Up</button>
+        <div>
+          <button onClick={() => movePlayer('ArrowLeft')}>Left</button>
+          <button onClick={() => movePlayer('ArrowDown')}>Down</button>
+          <button onClick={() => movePlayer('ArrowRight')}>Right</button>
+        </div>
       </div>
       <button onClick={regenerateMaze}>Regenerate Maze</button>
       <button onClick={endGame}>End Game</button>

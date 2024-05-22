@@ -27,3 +27,14 @@
     color: white;
   }
   
+  .controls {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 20px;
+  }
+  
+  .controls button {
+    margin: 5px;
+  }
+  
