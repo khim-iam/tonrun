@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { Route, Routes, useNavigate } from 'react-router-dom';
-import { TonConnectButton, useTonAddress, useTonWallet, useTonConnectUI } from '@tonconnect/ui-react';
+import { TonConnectButton, useTonAddress, useTonWallet } from '@tonconnect/ui-react';
 import Profile from './assets/components/Profile';
 import RoomSelection from './assets/components/RoomSelection';
 import MazeGame from './assets/components/MazeGame';
@@ -13,7 +13,7 @@ const AppContent: React.FC = () => {
   const navigate = useNavigate();
   const wallet = useTonWallet();
   const address = useTonAddress();
-  const [tonConnectUI] = useTonConnectUI();
+//   const [tonConnectUI] = useTonConnectUI();
 
   useEffect(() => {
     if (wallet) {
