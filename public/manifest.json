@@ -1,0 +1,19 @@
+{
+    "name": "TONRUN",
+    "description": "A fun TMA game on the TON ecosystem.",
+    "url": "https://localhost:5173/tonrun",
+    "icons": [
+      {
+        "src": "https://localhost:5173/tonrun/icon.png",
+        "sizes": "192x192",
+        "type": "image/png"
+      }
+    ],
+    "redirects": [
+      {
+        "source": "https://localhost:5173/tonrun",
+        "destination": "https://t.me/theTonRunBot"
+      }
+    ]
+  }
+  

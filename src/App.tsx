@@ -1,35 +1,40 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import twaLogo from './assets/tapps.png'
-import viteLogo from '/vite.svg'
-import './App.css'
+// import { useState } from 'react'
+// // import reactLogo from './assets/react.svg'
+// // import twaLogo from './assets/tapps.png'
+// // import viteLogo from '/vite.svg'
+// import './App.css'
+// import { TonConnectButton } from '@tonconnect/ui-react';
+// // import WebApp from '@twa-dev/sdk'
 
-// import WebApp from '@twa-dev/sdk'
+// function App() {
+//   return (
+//     <>
+//     <div>
+//       <header>
+//         <h1>TONRUN</h1>
+//       </header>
+//       <TonConnectButton />
+//     </div>
+//     </>
+//   )
+// }
 
-function App() {
-  const [count, setCount] = useState(0)
+// export default App;
 
+import { BrowserRouter } from 'react-router-dom';
+import { TonConnectUIProvider } from '@tonconnect/ui-react';
+import AppContent from './AppContent';
+
+const App: React.FC = () => {
   return (
-    <>
-      <div>
-        <a href="https://ton.org/dev" target="_blank">
-          <img src={twaLogo} className="logo" alt="TWA logo" />
-        </a>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>TONRUN</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-      </div>
-    </>
-  )
-}
+    <TonConnectUIProvider manifestUrl = 'https://raw.githubusercontent.com/ton-community/tutorials/main/03-client/test/public/tonconnect-manifest.json'>
+      <BrowserRouter>
+        <AppContent />
+      </BrowserRouter>
+    </TonConnectUIProvider>
+  );
+};
 
-export default App
+export default App;
+
+
