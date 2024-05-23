@@ -12,10 +12,18 @@
 //   </TonConnectUIProvider>,
 // )
 
+// import "buffer"; // Add this line at the top
+import { Buffer } from "buffer";
+// window.Buffer = Buffer;
+
+(window as any).Buffer = Buffer;
+
+// import React from "react";
+
 import ReactDOM from 'react-dom/client';
 import App from './App';
 import './index.css';
 
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
-  <App />
+    <App />
 );
