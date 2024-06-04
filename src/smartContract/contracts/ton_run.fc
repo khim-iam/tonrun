@@ -1,0 +1,201 @@
+#include "imports/stdlib.fc";
+
+{-
+Contract data :
+owner address
+game fee percent (32 bit int )
+
+-}
+
+( slice, int ) load_data() inline {
+
+    cell data = get_data();
+    slice ds = data.begin_parse();
+    slice owner_addr = ds~load_msg_addr();
+    int cost = ds~load_uint(32);
+
+    return (owner_addr, cost);
+}
+
+() save_data (slice owner_address, int cost) impure inline {
+    set_data(begin_cell()
+            .store_slice(owner_address)
+            .store_uint(cost, 32)
+            .end_cell());
+}
+
+int equal_slices (slice a, slice b) asm "SDEQ";
+
+slice get_sender_addr (cell in_msg_full) inline {
+    var cs = in_msg_full.begin_parse();
+    var flags = cs~load_uint(4);
+    slice sender_address = cs~load_msg_addr();
+    return sender_address;
+}
+
+
+
+
+
+
+
+() recv_internal(int my_balance, int msg_value, cell in_msg_full, slice in_msg_body) impure {
+    
+    int op = in_msg_body~load_uint(32);
+    int query_id = in_msg_body~load_uint(64);
+
+    if ( op == 1 ){
+        ;; recieve money from player 
+        {- 
+        OP 2 message format: 
+        OP (32 bit int )
+        query_id (64 bit int )
+        -}
+        return();
+
+    }
+    if (op == 2 ){
+
+        ;; distribute game money among players after game finishes 
+
+        {- 
+        OP 2 message format: 
+        OP (32 bit int )
+        query_id (64 bit int )
+        game type (64 bit int ) this will be the amount of ton to be recived by each player 
+        player 1 addr
+        player 1 ratio (32 bit int)
+        player 2 addr  
+        player 2 ratio (32 bit int)
+        player 3 addr
+        player 3 ratio (32 bit int)
+        -}
+        slice sender = get_sender_addr(in_msg_full);
+        (slice owner_address, int cost ) = load_data();
+        throw_unless(103, equal_slice_bits(sender, owner_address));
+
+
+
+
+        int game_value = in_msg_body~load_uint(16) ;
+
+        slice address1 = in_msg_body~load_msg_addr();
+        int ratio1 = in_msg_body~load_uint(16);
+        int amount1 = ratio1 * game_value * 10000000 ;
+
+        slice address2 = in_msg_body~load_msg_addr();
+        int ratio2 = in_msg_body~load_uint(16);
+        int amount2 = ratio2 * game_value * 10000000 ;
+        
+        slice address3 = in_msg_body~load_msg_addr();
+        int ratio3 = in_msg_body~load_uint(16);
+        int amount3 = ratio3 * game_value * 10000000 ;
+        
+
+       
+        
+
+        ;; Send messages to each address
+        var msg1 = begin_cell()
+            .store_uint(0x10, 6)
+            .store_slice(address1)
+            .store_grams(amount1)
+            .store_uint(0, 1 + 4 + 4 + 64 + 32 + 1 + 1)
+            .store_slice(owner_address)
+            .end_cell();
+        send_raw_message(msg1, 1);
+
+        var msg2 = begin_cell()
+            .store_uint(0x10, 6)
+            .store_slice(address2)
+            .store_grams(amount2 )
+            .store_uint(0, 1 + 4 + 4 + 64 + 32 + 1 + 1)
+            .store_slice(owner_address)
+            .end_cell();
+        send_raw_message(msg2, 1);
+
+        var msg3 = begin_cell()
+            .store_uint(0x10, 6)
+            .store_slice(address3)
+            .store_grams(amount3 )
+            .store_uint(0, 1 + 4 + 4 + 64 + 32 + 1 + 1)
+            .store_slice(owner_address)
+            .end_cell();
+        send_raw_message(msg3, 1);
+
+        save_data(owner_address,cost);
+        return();
+
+        
+
+    }
+
+    if (op == 3){
+        ;; send money to owner 
+        {- 
+        OP 3 message format: 
+        OP (32 bit int )
+        query_id (64 bit int )
+        withdrawal amount coins using load_coins function
+        -}
+        (slice owner_address, int cost ) = load_data();
+        slice sender = get_sender_addr(in_msg_full);
+        throw_unless(103, equal_slice_bits(sender, owner_address));
+
+        int withdraw_amount = in_msg_body~load_coins();
+        var [balance, _] = get_balance();
+        throw_unless(104, balance >= withdraw_amount);
+
+        int return_value = min(withdraw_amount, balance - 1);
+
+        int msg_mode = 1; ;; 0 (Ordinary message) + 1 (Pay transfer fees separately from the message value)
+
+        var msg = begin_cell()
+            .store_uint(0x18, 6)
+            .store_slice(owner_address)
+            .store_coins(return_value)
+            .store_uint(0, 1 + 4 + 4 + 64 + 32 + 1 + 1);
+
+        send_raw_message(msg.end_cell(), msg_mode);
+        save_data(owner_address,cost);
+        return();
+
+
+
+
+    }
+
+    if (op == 4 ){
+        ;; change cost 
+        {- 
+        OP 3 message format: 
+        OP (32 bit int )
+        query_id (64 bit int )
+        new cost value (32 bit )
+        -}
+
+        int cost_new  = in_msg_body~load_uint(32);
+        (slice owner_address, int cost ) = load_data();
+        save_data(owner_address,cost);
+        return();
+
+    }
+   
+    throw (1001);
+
+
+}
+
+
+( slice, int) get_contract_storage_data() method_id {
+  var (owners_address, cost) = load_data();
+  return (
+    owners_address,
+    cost
+  );
+}
+
+int balance() method_id {
+  var [balance, _] = get_balance();
+  return balance;
+}

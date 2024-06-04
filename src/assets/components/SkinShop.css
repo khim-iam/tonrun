@@ -1,0 +1,41 @@
+.skin-shop {
+    padding: 20px;
+    text-align: center;
+  }
+  
+  .skin-preview {
+    margin-bottom: 20px;
+  }
+  
+  .selected-skin {
+    width: 100px;
+    height: 100px;
+    border: 2px solid #000;
+    border-radius: 50%;
+  }
+  
+  .skin-list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  
+  .skin-item {
+    margin: 10px;
+    cursor: pointer;
+    text-align: center;
+  }
+  
+  .skin-item.selected {
+    border: 2px solid #00f;
+    border-radius: 10px;
+  }
+  
+  .skin-image {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    border: 1px solid #ccc;
+    margin-bottom: 5px;
+  }
+  

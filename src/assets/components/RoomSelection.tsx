@@ -5,13 +5,17 @@ const RoomSelection: React.FC = () => {
   const navigate = useNavigate();
 
   const handlePrivateRoom = () => {
+    
     navigate('/private-room');
+  };
+  const handlePublicRoom = () => {
+    navigate('/public-room');
   };
 
   return (
     <div>
       <h2>Select Room</h2>
-      <button onClick={() => alert('Public Room Coming Soon')}>Public Room</button>
+      <button onClick={handlePublicRoom}>Public Room</button>
       <button onClick={handlePrivateRoom}>Private Room</button>
     </div>
   );
