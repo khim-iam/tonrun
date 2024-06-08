@@ -5,6 +5,17 @@
   text-align: center;
 }
 
+body {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  height:fit-content;
+  width:fit-content;
+  background: url('./TheOGbg.png') no-repeat center center fixed; /* Background image */
+  /*background-size: contain;  Ensure the background covers the entire viewport */
+  background-size: cover;
+  background-attachment: fixed ;
+}
+
 .logo {
   height: 6em;
   padding: 1.5em;
@@ -41,4 +52,29 @@
   color: #888;
 }
 
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px; /* Space between the two sets of buttons */
+}
 
+.button-group {
+  display: flex;
+  gap: 10px; /* Space between buttons in the same group */
+}
+
+.button {
+  border: transparent; /* Same border for all buttons */
+   padding: 25px 10px; /* Optional padding */
+  border-radius: 5px; /* Optional border radius */
+  background-color: transparent; /* Optional background color */
+  cursor: pointer; /* Change cursor on hover */
+}
+
+/*
+.left, .right {
+  display: flex;
+  gap: 10px;
+}
+*/

@@ -51,6 +51,7 @@ const AppContent: React.FC = () => {
     }
     navigate('/private-room');
   };
+
   const handlePublicRoom = () => {
     if (!connected) {
       alert('Please connect your wallet first!');
@@ -58,6 +59,7 @@ const AppContent: React.FC = () => {
     }
     navigate('/public-room');
   };
+
   const handlePrevGames = () => {
     if (!connected) {
       alert('Please connect your wallet first!');
@@ -65,6 +67,7 @@ const AppContent: React.FC = () => {
     }
     navigate('/previous-games');
   };
+
   const handleSkinShop = () => {
     if (!connected) {
       alert('Please connect your wallet first!');
@@ -73,17 +76,17 @@ const AppContent: React.FC = () => {
     navigate('/skin-shop');
   };
 
-  const showBackButton = location.pathname === '/private-room' || location.pathname === '/previous-games'|| location.pathname === '/skin-shop';
-
-  const hideMainPageContentPaths = ['/public-room', '/private-room', '/public-game', '/previous-games','/skin-shop'];
-
+  const showBackButton = location.pathname === '/private-room' || location.pathname === '/previous-games' || location.pathname === '/skin-shop';
+  const hideMainPageContentPaths = ['/public-room', '/private-room', '/public-game', '/previous-games', '/skin-shop'];
   const shouldHideMainPageContent = hideMainPageContentPaths.includes(location.pathname);
 
   return (
     <div>
       {!shouldHideMainPageContent && (
         <header style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-          <h1>TONRUN</h1>
+          <div>
+            <img src="./ton_logo 1.png" alt="TONRUN" className="GameName" />
+          </div>
           <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', width: '100%' }}>
             <TonConnectButton className="my-button-class" />
             <Profile user={user} />
@@ -91,26 +94,38 @@ const AppContent: React.FC = () => {
         </header>
       )}
 
-      {!shouldHideMainPageContent && (
+      {!shouldHideMainPageContent && connected && (
         <div>
-          <h2>Select Room</h2>
-          <button onClick={handlePublicRoom}>Play Now</button>
-          <button onClick={handlePrivateRoom}>Private Room</button>
-          <div>
-            <button onClick={handlePrevGames}>Previous Games</button>
-            <button onClick={handleSkinShop}>Skin Shop</button>
+          <div className="container">
+            <div className="button-group">
+              <button className="button" onClick={handlePublicRoom}>
+                <img src='./Button.png' alt="Start" />
+              </button>
+            </div>
+            <div className="button-group">
+              <button className="button" onClick={handlePrivateRoom}>
+                <img src='./PvtRoom.png' alt="Private Room" />
+              </button>
+            </div>
+            <div className="button-group">
+              <button className="button" onClick={handlePrevGames}>
+                <img src='./PrevGame.png' alt="Previous Game" />
+              </button>
+              <button className="button" onClick={handleSkinShop}>
+                <img src='./SkinShop.png' alt="Skin Shop" />
+              </button>
+            </div>
           </div>
         </div>
       )}
 
       <Routes>
-        <Route path="/tonrun/" element={<div>Welcome to TONRUN</div>} />
+        {/* <Route path="/tonrun/" element={<div>Welcome to TONRUN</div>} /> */}
         <Route path="/public-room" element={<PublicMazeGame />} />
         <Route path="/private-room" element={<PrivateMazeGame />} />
         <Route path="/public-game" element={<GameMaze />} />
         {/* <Route path="/public-game" element={<GameCanvas />} /> */}
         {/* <Route path="/public-game" element={<App1 />} /> */}
-
         <Route path="/previous-games" element={<PrevGames />} />
         <Route path="/skin-shop" element={<SkinShop />} />
       </Routes>
@@ -120,6 +135,7 @@ const AppContent: React.FC = () => {
 };
 
 export default AppContent;
+
 
 
 

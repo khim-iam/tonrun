@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { io } from 'socket.io-client';
 import './Lobby.css';
 
-const socket = io('https://localhost:3000'); // Ensure this is HTTPS and matches your server
+const socket = io('https://localhost:5173/public-room'); // Ensure this is HTTPS and matches your server
 
 const Lobby: React.FC = () => {
   const [players, setPlayers] = useState<{ [key: string]: { username: string, ready: boolean } }>({});
@@ -36,8 +36,9 @@ const Lobby: React.FC = () => {
   };
 
   return (
+    
     <div className="lobby">
-      <h2>Lobby</h2>
+      <h2>Lobby</h2> 
       <div>
         <input
           type="text"
@@ -54,6 +55,7 @@ const Lobby: React.FC = () => {
       </ul>
       <button onClick={toggleReady}>{isReady ? 'Unready' : 'Ready'}</button>
     </div>
+    
   );
 };
 
