@@ -2,25 +2,8 @@ import React, { useState, useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { io, Socket } from 'socket.io-client';
 import './MazeGame.css';
-import {TonRun} from '../../smartContract/wrappers/TonRun.ts'
+// import {TonRun} from '../../smartContract/wrappers/TonRun.ts'
 import { useTonConnectUI } from '@tonconnect/ui-react'; // Import for TonConnect
-import { useTonAddress} from '@tonconnect/ui-react';
-import { Address, OpenedContract  } from "@ton/ton";
-import { useTonClient } from '../../hooks/useTonClients.ts';
-import { useAsyncInitialize } from '../../hooks/useAsyncInitialize';
-
-const userAddress = Address.parse(useTonAddress());
-// const userAddress = useTonAddress();
-const contractAddress = "EQDyfAlrcoKHSo-IeafeYjMBNdtUmrLkqV3iGNJqxixljROw";
-const queryId = 1234;
-const client = useTonClient();
-const tonRunContract = useAsyncInitialize(async () => {
-  if (!client) return;
-  const contract = new TonRun(
-    Address.parse(contractAddress) // replace with your address from tutorial 2 step 8
-  );
-  return client.open(contract) as OpenedContract<TonRun>;
-}, [client]);
 
 
 
@@ -86,14 +69,6 @@ const PublicMazeGame: React.FC = () => {
     validUntil: number;
 };
 
-  // const sendTransaction = async (transaction: { messages: { address: string; amount: string }[] }) => {
-  //   try {
-  //     await tonConnectUI.sendTransaction(transaction);
-  //   } catch (error) {
-  //     console.error('Error sending transaction:', error);
-  //     alert('Transaction failed!');
-  //   }
-  // };
   const sendTransaction = async (transaction: SendTransactionRequest) => {
     try {
         await tonConnectUI.sendTransaction(transaction);
@@ -130,7 +105,7 @@ const PublicMazeGame: React.FC = () => {
   
     sendTransaction(transaction); // Call the separate async function
 
-    tonRunContract.sendGameMoney(userAddress, BigInt(league), BigInt(queryId))
+    // tonRunContract.sendGameMoney(userAddress, BigInt(league), BigInt(queryId))
 
 
 
@@ -266,3 +241,31 @@ const PublicMazeGame: React.FC = () => {
 };
 
 export default PublicMazeGame;
+
+
+
+
+// import React from 'react';
+// import './styles.css';
+// import GameCanvas from './GameCanvas';
+// import Countdown from './Countdown';
+
+// const PublicMazeGame: React.FC = () => {
+//   return (
+//     <div className="App">
+//       <GameCanvas />
+//       <Countdown />
+//       <div className="power-up-container">
+//         <div className="power-up" data-type="speed">Speed</div>
+//         <div className="power-up" data-type="slow">Slow</div>
+//         <div className="power-up" data-type="freeze">Freeze</div>
+//       </div>
+//       <div id="endpop"></div>
+//       <div id="playerlabels" style={{ position: 'absolute', color: 'white', padding: '8px', fontFamily: 'sans-serif', fontSize: '14px', userSelect: 'none', background: 'rgba(0,0,0,0.7)' }}>
+//         <div>leaderboard</div>
+//       </div>
+//     </div>
+//   );
+// };
+
+// export default PublicMazeGame;

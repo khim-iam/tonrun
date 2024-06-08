@@ -6,7 +6,9 @@ import PrivateMazeGame from './assets/components/PrivateMazeGame';
 import PublicMazeGame from './assets/components/PublicMazeGame';
 import PrevGames from './assets/components/PrevGames';
 import SkinShop from './assets/components/SkinShop';
-import GameCanvas from './assets/components/GameCanvas';
+// import GameCanvas from './assets/components/GameCanvas';
+// import App1 from './assets/components/frontend';
+import GameMaze from './assets/components/MazeGame';
 import { User } from './types';
 import './App.css';
 import { getTonBalance } from './utils/tonUtils';
@@ -105,7 +107,10 @@ const AppContent: React.FC = () => {
         <Route path="/tonrun/" element={<div>Welcome to TONRUN</div>} />
         <Route path="/public-room" element={<PublicMazeGame />} />
         <Route path="/private-room" element={<PrivateMazeGame />} />
-        <Route path="/public-game" element={<GameCanvas />} />
+        <Route path="/public-game" element={<GameMaze />} />
+        {/* <Route path="/public-game" element={<GameCanvas />} /> */}
+        {/* <Route path="/public-game" element={<App1 />} /> */}
+
         <Route path="/previous-games" element={<PrevGames />} />
         <Route path="/skin-shop" element={<SkinShop />} />
       </Routes>
