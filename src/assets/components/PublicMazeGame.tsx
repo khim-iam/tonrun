@@ -4,6 +4,8 @@ import { io, Socket } from 'socket.io-client';
 import './MazeGame.css';
 // import {TonRun} from '../../smartContract/wrappers/TonRun.ts'
 import { useTonConnectUI } from '@tonconnect/ui-react'; // Import for TonConnect
+import { useTonRun } from '../../hooks/useTonRun';
+import { useTonConnect } from '../../hooks/useTonConnect';
 
 
 
@@ -37,6 +39,12 @@ const PublicMazeGame: React.FC = () => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
 
   const [tonConnectUI] = useTonConnectUI(); // TonConnect instance
+
+  const connected=useTonConnect()
+
+  const {
+    sendGameMoney,
+  } = useTonRun();
 
   const paymentAmounts = {
     1: '10000000', // 1 Ton for League 1 (in nanotons)
@@ -93,19 +101,21 @@ const PublicMazeGame: React.FC = () => {
       return;
     }
 
-    const transaction = {
-      messages: [
-          {
-              address: "0QCXG6BWBXt6Nuf0gDTUnwLZHzaGKEyzH3HcceK4vcynbb_8", // destination address
-              amount: paymentAmount.toString() // Toncoin in nanotons
-          }
-      ],
-      validUntil: Math.floor(Date.now() / 1000) + 3600 // valid for the next 1 hour (3600 seconds)
-  }
+  //   const transaction = {
+  //     messages: [
+  //         {
+  //             address: "0QCXG6BWBXt6Nuf0gDTUnwLZHzaGKEyzH3HcceK4vcynbb_8", // destination address
+  //             amount: paymentAmount.toString() // Toncoin in nanotons
+  //         }
+  //     ],
+  //     validUntil: Math.floor(Date.now() / 1000) + 3600 // valid for the next 1 hour (3600 seconds)
+  // }
   
-    sendTransaction(transaction); // Call the separate async function
+  //   sendTransaction(transaction); // Call the separate async function
 
-    // tonRunContract.sendGameMoney(userAddress, BigInt(league), BigInt(queryId))
+  //   // tonRunContract.sendGameMoney(userAddress, BigInt(league), BigInt(queryId))
+
+  sendGameMoney(BigInt(1e9))
 
 
 

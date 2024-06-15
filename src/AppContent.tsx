@@ -12,6 +12,7 @@ import GameMaze from './assets/components/MazeGame';
 import { User } from './types';
 import './App.css';
 import { getTonBalance } from './utils/tonUtils';
+import Game from './assets/components/Game';
 
 const AppContent: React.FC = () => {
   const [connected, setConnected] = useState<boolean>(false);
@@ -76,12 +77,20 @@ const AppContent: React.FC = () => {
     navigate('/skin-shop');
   };
 
+  const handlegame = () => {
+    if (!connected) {
+      alert('Please connect your wallet first!');
+      return;
+    }
+    navigate('/game-window');
+  };
+
   const showBackButton = location.pathname === '/private-room' || location.pathname === '/previous-games' || location.pathname === '/skin-shop';
-  const hideMainPageContentPaths = ['/public-room', '/private-room', '/public-game', '/previous-games', '/skin-shop'];
+  const hideMainPageContentPaths = ['/public-room', '/private-room', '/public-game', '/previous-games', '/skin-shop', '/game-window'];
   const shouldHideMainPageContent = hideMainPageContentPaths.includes(location.pathname);
 
   return (
-    <div>
+    <div id="main-div">
       {!shouldHideMainPageContent && (
         <header style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
           <div>
@@ -100,6 +109,11 @@ const AppContent: React.FC = () => {
             <div className="button-group">
               <button className="button" onClick={handlePublicRoom}>
                 <img src='./Button.png' alt="Start" />
+              </button>
+            </div>
+            <div className="button-group">
+              <button className="button" onClick={handlegame} id="game-font">
+                Game
               </button>
             </div>
             <div className="button-group">
@@ -128,6 +142,8 @@ const AppContent: React.FC = () => {
         {/* <Route path="/public-game" element={<App1 />} /> */}
         <Route path="/previous-games" element={<PrevGames />} />
         <Route path="/skin-shop" element={<SkinShop />} />
+        <Route path="/game-window" element={<Game user={user}/>} />
+
       </Routes>
       {showBackButton && <button onClick={() => navigate('/tonrun/')}>Back</button>}
     </div>

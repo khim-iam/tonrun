@@ -1,0 +1,132 @@
+
+#game-canvas{
+    height: 100%;
+    width: 100%;
+    background-color: rgb(201, 10, 10);
+    position: fixed;
+  }
+
+  canvas{
+    height: 100%;
+    width: 100%;
+    background-color: rgb(0, 0, 0);
+  }
+
+  #controls {
+    position: absolute;
+    bottom: 5%;
+    left: 50%;
+    transform: translate(-50%, 0%);
+    width: 100px;
+    height: 100px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  #controls button {
+    position: absolute;
+    background-color: #007bff;
+    border: none;
+    border-radius: 50%;
+    color: white;
+    font-size: 1.5em;
+    padding: 10px;
+    cursor: pointer;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.3s, transform 0.1s;
+  }
+  
+  #controls button:hover {
+    background-color: #0056b3;
+  }
+  
+  /* #controls button:active {
+    transform: scale(0.9);
+  } */
+  
+  #move-up {
+    top: 0;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+  
+  #move-left {
+    top: 50%;
+    left: 0;
+    transform: translate(-50%, -50%);
+  }
+  
+  #move-down {
+    bottom: 0;
+    left: 50%;
+    transform: translate(-50%, 50%);
+  }
+  
+  #move-right {
+    top: 50%;
+    right: 0;
+    transform: translate(50%, -50%);
+  }
+
+  #powerups {
+    position: absolute;
+    bottom: 3%;
+    left: 5%;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  
+  #powerups button {
+    background-color: #38d65d;
+    border: none;
+    border-radius: 5px;
+    color: rgb(0, 0, 0);
+    font-size: 1em;
+    padding: 10px;
+    cursor: pointer;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.3s, transform 0.1s;
+  }
+  
+  #powerups button:hover {
+    background-color: #218838;
+  }
+
+  #powerups #slow {
+    background-color: orange;
+  }
+  
+  #powerups #pause {
+    background-color: red;
+  }
+  
+  /* Uncomment if you want to add a press effect */
+  
+  #powerups button:active {
+    transform: scale(0.9);
+  } 
+ 
+
+  #player-scores {
+    position: absolute;
+    bottom: 5%;
+    right: 2%;
+    background-color: rgba(0, 0, 0, 0.7);
+    padding: 10px;
+    border-radius: 10px;
+    color: white;
+  }
+  
+  #player-scores .player-score {
+    margin: 5px 0;
+  }
+  
+  #player-scores .username {
+    font-weight: bold;
+  }
+  
+  #player-scores .score {
+    color: #ffcc00;
+  }
