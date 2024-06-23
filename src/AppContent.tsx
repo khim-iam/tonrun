@@ -3,12 +3,12 @@ import { Route, Routes, useNavigate, useLocation } from 'react-router-dom';
 import { TonConnectButton, useTonAddress, useTonWallet } from '@tonconnect/ui-react';
 import Profile from './assets/components/Profile';
 import PrivateMazeGame from './assets/components/PrivateMazeGame';
-import PublicMazeGame from './assets/components/PublicMazeGame';
+// import PublicMazeGame from './assets/components/PublicMazeGame';
 import PrevGames from './assets/components/PrevGames';
 import SkinShop from './assets/components/SkinShop';
 // import GameCanvas from './assets/components/GameCanvas';
 // import App1 from './assets/components/frontend';
-import GameMaze from './assets/components/MazeGame';
+// import GameMaze from './assets/components/MazeGame';
 import { User } from './types';
 import './App.css';
 import { getTonBalance } from './utils/tonUtils';
@@ -135,9 +135,12 @@ const AppContent: React.FC = () => {
 
       <Routes>
         {/* <Route path="/tonrun/" element={<div>Welcome to TONRUN</div>} /> */}
-        <Route path="/public-room" element={<PublicMazeGame />} />
+        {/* <Route path="/public-room" element={<PublicMazeGame />} />
+        <Route path="/private-room" element={<PrivateMazeGame />} /> */}
+        <Route path="/public-room" element={<Game user={user}/>} />
         <Route path="/private-room" element={<PrivateMazeGame />} />
-        <Route path="/public-game" element={<GameMaze />} />
+        <Route path="/public-game" element={<Game user={user}/>} />
+        {/* <Route path="/public-game" element={<GameMaze />} /> */}
         {/* <Route path="/public-game" element={<GameCanvas />} /> */}
         {/* <Route path="/public-game" element={<App1 />} /> */}
         <Route path="/previous-games" element={<PrevGames />} />

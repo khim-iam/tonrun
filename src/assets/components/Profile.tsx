@@ -43,10 +43,10 @@ const Profile: React.FC<{ user: User }> = ({ user }) => {
 
         {connected && (
           <>
-            <p>userXYZ{/*user.account */}</p>
+            <p>user.account</p>
             <div>
               <img src="./TonToken.png" alt="TON Token" className="TonCoin" />
-              {/* <p>TON Balance: {user.balance} TON</p> */}
+               <p>TON Balance: {user.balance} TON</p> 
             </div>
             <div>
               <img src="./transfer.png" alt="Transfer" />
