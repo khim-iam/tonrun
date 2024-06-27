@@ -53,13 +53,13 @@ const AppContent: React.FC = () => {
     navigate('/private-room');
   };
 
-  const handlePublicRoom = () => {
-    if (!connected) {
-      alert('Please connect your wallet first!');
-      return;
-    }
-    navigate('/public-room');
-  };
+  // const handlePublicRoom = () => {
+  //   if (!connected) {
+  //     alert('Please connect your wallet first!');
+  //     return;
+  //   }
+  //   navigate('/public-room');
+  // };
 
   const handlePrevGames = () => {
     if (!connected) {
