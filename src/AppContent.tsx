@@ -88,7 +88,9 @@ const AppContent: React.FC = () => {
   const showBackButton = location.pathname === '/private-room' || location.pathname === '/previous-games' || location.pathname === '/skin-shop';
   const hideMainPageContentPaths = ['/public-room', '/private-room', '/public-game', '/previous-games', '/skin-shop', '/game-window'];
   const shouldHideMainPageContent = hideMainPageContentPaths.includes(location.pathname);
-
+  const handleClick = () => {
+    window.open('https://ton.org/en/dev', '_blank');
+  };
   return (
     <div id="main-div">
       {!shouldHideMainPageContent && (
@@ -107,9 +109,10 @@ const AppContent: React.FC = () => {
         <div>
           <div className="container">
             <div className="button-group">
-              <button className="button" onClick={handlePublicRoom}>
-                <img src='./Button.png' alt="Start" />
-              </button>
+              {/* <button className="button" onClick={handlePublicRoom}> */}
+              <button className="button" onClick={handleClick}>
+      <img src='./Button.png' alt="Start" />
+    </button>
             </div>
             <div className="button-group">
               <button className="button" onClick={handlegame} id="game-font">
